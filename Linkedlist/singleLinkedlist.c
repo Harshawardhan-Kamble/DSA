@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<limits.h>
 struct node{
     int data;
     struct node *next;
@@ -109,13 +110,24 @@ void getLength(struct node *ptr){
   temp=ptr;
   if(temp==NULL){
  printf("Length of list is empty \n" );
-
   }
   while(temp!=NULL){
     ++count;
     temp=temp->next;
   }
   printf("Length of list is %d \n",count );
+}
+
+void maximumElement(struct node *head){
+  struct node *temp=head;
+  int max=INT_MIN;
+  while(temp!=NULL){
+    if(max<temp->data){
+      max=temp->data;
+    }
+    temp=temp->next;
+  }
+  printf("Maximum data is %d \n",max);
 }
 
 void reverseLinkedlist(struct node **ptr){
@@ -150,9 +162,10 @@ int main(){
 struct node *head;
   head=NULL;
   createNode(&head);
- //insertNode(&head,4,35);
+ insertNode(&head,4,35);
   getLength(head);
- //deleteNode(&head,5);
+  maximumElement(head);
+ deleteNode(&head,5);
   reverseLinkedlist(&head);
   display(head);
   freeList(&head);
