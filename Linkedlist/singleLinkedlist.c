@@ -130,6 +130,38 @@ void maximumElement(struct node *head){
   printf("Maximum data is %d \n",max);
 }
 
+void searching(struct node **head,int key ){
+  //only linear search is possible . we can't do binary search because we can't find middle of linkedlist we have to transverse ;
+  if(*head==NULL){
+    printf("Empty List");
+    return;
+  }
+  struct node *temp,*prev;
+  int count=0;
+  prev=NULL;
+  temp=*head;
+  while(temp!=NULL){
+    if(temp->data==key){
+      printf("key exist in linkedlist at position %d \n",count);
+      if(prev!=NULL){
+      prev->next=temp->next;
+      temp->next=*head;
+      *head=temp;
+      }
+      return  ;
+    }
+    prev=temp;
+    temp=temp->next;
+    ++count;
+  }
+
+  //if key is  found and lets say we want to improve our liear search i.e the same key should be searched in O(1)
+  //in that case we can shift the key found to the front so the next time you search for that key will be done in O(1)
+  //instead of O(n)
+  printf("key not found");
+}
+
+
 void reverseLinkedlist(struct node **ptr){
   struct node *prevNode=NULL,*currentNode,*nextNode;
   currentNode=nextNode=*ptr;
@@ -162,11 +194,12 @@ int main(){
 struct node *head;
   head=NULL;
   createNode(&head);
- insertNode(&head,4,35);
+  searching(&head,40);
+  /*insertNode(&head,4,35);
   getLength(head);
   maximumElement(head);
- deleteNode(&head,5);
-  reverseLinkedlist(&head);
+  deleteNode(&head,5);
+  reverseLinkedlist(&head);*/
   display(head);
   freeList(&head);
   return 0;
