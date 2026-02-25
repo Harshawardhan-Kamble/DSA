@@ -1,36 +1,13 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 struct node{
   int data;
   struct node *next;
 };
-void createNode(struct node **head){
-  int choice=1;
-  while(choice){
-  struct node *newNode;
-  newNode=(struct node *) malloc(sizeof (struct node));
-    if(!newNode){
-      printf("Overflow");
-      return;
-    }
-    printf("Enter data ");
-    scanf("%d",&newNode->data);
-    newNode->next=0;
-    if(*head==NULL){
-      *head=newNode;
-    }
-    else{
-      newNode->next=*head;
-      *head=newNode;
-    }
-    do {
-      printf("enter 1 to create node or 0 to delete \n");
-      scanf("%d",&choice);
-    } while (choice!=0 && choice!=1);
-  }
-}
+
 bool isEmpty(struct node *head){
-  (head==NULL)?true:false;
+  return(head==NULL)?true:false;
 }
 void push(struct node **head,int data ){
   struct node *newNode =(struct node *)malloc(sizeof (struct node));
@@ -52,8 +29,12 @@ void pop(struct node **head){
   free(temp);
   temp=NULL;
 }
-void peek(struct node  *head){
-printf("Top is %d",(head)->data);
+int peek(struct node  *head){
+  if(head==NULL){
+   
+    return -1 ;
+  }
+return head->data;
 }
 void display(struct node *head){
   struct node *temp=head;
@@ -64,14 +45,21 @@ void display(struct node *head){
 }
 int main(){
   struct node *head=NULL;
-  isEmpty(head);
-  createNode(&head);
+if (isEmpty(head)) {
+    printf("Stack is empty\n");
+}
   push(&head,60);
   push(&head,70);
   push(&head,80);
   push(&head,90);
   pop(&head);
-  peek(head);
+  int value=peek(head);
+  if(value==-1){
+ printf("Stack is empty\n");
+  }
+  else{
+  printf(" top is %d \n",value);
+  }
   display(head);
   return 0; 
 }
