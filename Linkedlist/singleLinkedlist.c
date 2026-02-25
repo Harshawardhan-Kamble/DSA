@@ -195,11 +195,11 @@ struct node *head;
   head=NULL;
   createNode(&head);
   searching(&head,40);
-  /*insertNode(&head,4,35);
+  insertNode(&head,4,35);
   getLength(head);
   maximumElement(head);
   deleteNode(&head,5);
-  reverseLinkedlist(&head);*/
+  reverseLinkedlist(&head);
   display(head);
   freeList(&head);
   return 0;
